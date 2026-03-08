@@ -1,0 +1,76 @@
+openapi: 3.0.3
+info:
+  title: Help Desk SaaS API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api
+paths:
+  /auth/login:
+    post:
+      summary: Autenticação
+      requestBody:
+        required: true
+      responses:
+        '200':
+          description: Token JWT gerado
+  /tickets:
+    get:
+      summary: Lista tickets do tenant
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Tickets
+    post:
+      summary: Cria ticket
+      security:
+        - bearerAuth: []
+      responses:
+        '201':
+          description: Ticket criado
+  /messages:
+    post:
+      summary: Envia mensagem no atendimento
+      security:
+        - bearerAuth: []
+      responses:
+        '201':
+          description: Mensagem criada
+  /knowledge-base/articles:
+    get:
+      summary: Lista artigos da base de conhecimento
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Artigos
+  /automations/evaluate:
+    post:
+      summary: Avalia regras If This Then That
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Ações acionadas
+  /ai/rag-answer:
+    post:
+      summary: Gera resposta com RAG
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Resposta IA
+  /analytics/dashboard:
+    get:
+      summary: Indicadores do dashboard
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Métricas de operação
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
